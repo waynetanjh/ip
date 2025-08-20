@@ -47,6 +47,11 @@ public class Jack {
                 continue;
             }
 
+            if (userInput.equals("blah")) {
+                echo("\tEnter a valid task\n\t");
+                continue;
+            }
+
             if (userInput.equals("list")) {
                 if (numberOfTasks == 0) {
                     echo("\tHere are the tasks in your list:\n\t  (no tasks yet)");
@@ -73,7 +78,13 @@ public class Jack {
                 tasks[index].unmark();
                 unmarkCompleted("\t" + tasks[index].toString());
             } else if (userInput.startsWith("todo")) {
-                String desc = userInput.substring(5).trim(); // everything after "todo "
+
+                // Error handling for empty description of todo
+                if (userInput.length() <= 4) {
+                    echo("\tOOPS!!! The description of a todo cannot be empty");
+                    continue;
+                }
+                String desc = userInput.substring(5).trim(); // everything after "todo"
                 tasks[numberOfTasks] = new Todo(desc);
                 numberOfTasks++;
 
