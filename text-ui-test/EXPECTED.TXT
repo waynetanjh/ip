@@ -44,5 +44,15 @@ What can I do for you?
 	4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	-----------------------------------------
 	-----------------------------------------
+	Noted. I've removed this task:
+	  [ ] go for a walk
+	Now you have 3 tasks in the list.
+	-----------------------------------------
+	-----------------------------------------
+	1. [T][ ] borrow book
+	2. [D][ ] return book (by: Sunday)
+	3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	-----------------------------------------
+	-----------------------------------------
 	Bye. Hope to see you again soon!
 	-----------------------------------------
