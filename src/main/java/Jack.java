@@ -4,12 +4,20 @@ import java.util.Scanner;
 public class Jack {
     private static final String LINE = "-----------------------------------------";
 
+    /**
+     * Prints a message with lines above and below for seperation
+     * @param text the message that is displayed
+     */
     private static void echo(String text) {
         System.out.println("\t" + LINE);
         System.out.println(text);
         System.out.println("\t" + LINE);
     }
 
+    /**
+     * Prints confirmation message that the task has been marked as completed
+     * @param text the task represented as a string
+     */
     private static void markCompleted(String text) {
         System.out.println("\t" + LINE);
         System.out.println("\t" + "Nice! I've marked this task as done:");
@@ -17,6 +25,10 @@ public class Jack {
         System.out.println("\t" + LINE);
     }
 
+    /**
+     * Prints a confirmation message that the task has been marked as uncompleted
+     * @param text the string representation of the task
+     */
     private static void unmarkCompleted(String text) {
         System.out.println("\t" + LINE);
         System.out.println("\t" + "OK, I've marked this task as not done yet:");
@@ -24,6 +36,9 @@ public class Jack {
         System.out.println("\t" + LINE);
     }
 
+    /**
+     * Prints a welcome message when program starts
+     */
     private static void printWelcomeMessage() {
         String name = "Jack";
         System.out.println(LINE);
@@ -41,6 +56,67 @@ public class Jack {
         echo("\tNoted. I've removed this task:\n\t  "
                 + removed
                 + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+    }
+
+    /**
+     * Handles the addition of a {@code Todo} task to the task list.
+     * <p>
+     * If the description after todo is missing or blank, the task is not added and warning will be printed.
+     *
+     * @param tasks     the new Todo will be added to this the list of tasks
+     * @param argument  the description part of the todo command is everything after "todo"
+     */
+    public static void handleToDo(ArrayList<Task> tasks, String argument) {
+        if (argument == null || argument.isBlank()) {
+            echo("\tOOPS!!! The description of a todo cannot be empty");
+            return;
+        }
+        String desc = argument.trim();
+        tasks.add(new Todo(desc));
+
+        echo("\tGot it. I've added this task:\n\t  "
+                + tasks.get(tasks.size() - 1)
+                + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+    }
+
+    /**
+     * Handles the addition of a deadline task to the task list.
+     * @param tasks new deadline tasks are added to this list of tasks
+     * @param argument description of the deadline task
+     */
+    public static void handleDeadlineTask(ArrayList<Task> tasks, String argument) {
+        if (argument == null || argument.isBlank()) {
+            echo("\tOOPS!!! The description of a todo cannot be empty");
+            return;
+        }
+        String[] parts = argument.split("/by", 2);
+        String desc = parts[0].trim();
+        String by = parts[1].trim();
+        tasks.add(new Deadline(desc, by));
+        int numberOfTasks = tasks.size();
+
+        echo("\tGot it. I've added this task:\n\t  "
+                + tasks.get(numberOfTasks - 1)
+                + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
+
+    }
+
+    /**
+     * Handles the addition of the event task to the task list.
+     * @param tasks event task added to this list of tasks
+     * @param argument description of event consisting of from and to date
+     */
+    public static void handleEventTask(ArrayList<Task> tasks, String argument) {
+        String[] parts = argument.split("/from|/to", 3);
+        String desc = parts[0].trim();
+        String from = parts[1].trim();
+        String to = parts[2].trim();
+        tasks.add(new Event(desc, from, to));
+        int numberOfTasks = tasks.size();
+
+        echo("\tGot it. I've added this task:\n\t  "
+                + tasks.get(numberOfTasks - 1)
+                + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -102,41 +178,15 @@ public class Jack {
                 }
                 case "todo": {
                     // Error handling for empty description of todo
-                    if (userInput.length() == 4) {
-                        echo("\tOOPS!!! The description of a todo cannot be empty");
-                        continue;
-                    }
-                    String desc = userInput.substring(5).trim(); // everything after "todo"
-                    tasks.add(new Todo(desc));
-
-                    echo("\tGot it. I've added this task:\n\t  "
-                            + tasks.get(tasks.size() - 1)
-                            + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                    handleToDo(tasks, argument);
                     break;
                 }
                 case "deadline": {
-                    String[] parts = argument.split("/by", 2);
-                    String desc = parts[0].trim();
-                    String by = parts[1].trim();
-                    tasks.add(new Deadline(desc, by));
-                    int numberOfTasks = tasks.size();
-
-                    echo("\tGot it. I've added this task:\n\t  "
-                            + tasks.get(numberOfTasks - 1)
-                            + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
+                    handleDeadlineTask(tasks, argument);
                     break;
                 }
                 case ("event"): {
-                    String[] parts = argument.split("/from|/to", 3);
-                    String desc = parts[0].trim();
-                    String from = parts[1].trim();
-                    String to = parts[2].trim();
-                    tasks.add(new Event(desc, from, to));
-                    int numberOfTasks = tasks.size();
-
-                    echo("\tGot it. I've added this task:\n\t  "
-                            + tasks.get(numberOfTasks - 1)
-                            + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
+                    handleEventTask(tasks, argument);
                     break;
                 }
                 case "delete": {
