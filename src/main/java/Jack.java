@@ -1,9 +1,21 @@
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Jack {
     private static final String LINE = "-----------------------------------------";
+    private static final Storage STORAGE = new Storage("data/duke.txt");
+    private final List<Task> tasks = new ArrayList<>();
 
+    public Jack() {
+        try {
+           STORAGE.loadFile(tasks);
+        } catch (IOException e) {
+            System.out.println("Error reading file");
+        }
+    }
     /**
      * Prints a message with lines above and below for seperation
      * @param text the message that is displayed
@@ -47,7 +59,7 @@ public class Jack {
         System.out.println(LINE);
     }
 
-    private static void handleDelete(ArrayList<Task> tasks, int index) {
+    private static void handleDelete(List<Task> tasks, int index) {
         if (tasks.isEmpty()) {
             throw new IllegalArgumentException("No tasks to delete");
         }
@@ -66,7 +78,7 @@ public class Jack {
      * @param tasks     the new Todo will be added to this the list of tasks
      * @param argument  the description part of the todo command is everything after "todo"
      */
-    public static void handleToDo(ArrayList<Task> tasks, String argument) {
+    private static void handleToDo(List<Task> tasks, String argument) {
         if (argument == null || argument.isBlank()) {
             echo("\tOOPS!!! The description of a todo cannot be empty");
             return;
@@ -84,7 +96,7 @@ public class Jack {
      * @param tasks new deadline tasks are added to this list of tasks
      * @param argument description of the deadline task
      */
-    public static void handleDeadlineTask(ArrayList<Task> tasks, String argument) {
+    private static void handleDeadlineTask(List<Task> tasks, String argument) {
         if (argument == null || argument.isBlank()) {
             echo("\tOOPS!!! The description of a todo cannot be empty");
             return;
@@ -106,7 +118,7 @@ public class Jack {
      * @param tasks event task added to this list of tasks
      * @param argument description of event consisting of from and to date
      */
-    public static void handleEventTask(ArrayList<Task> tasks, String argument) {
+    private static void handleEventTask(List<Task> tasks, String argument) {
         String[] parts = argument.split("/from|/to", 3);
         String desc = parts[0].trim();
         String from = parts[1].trim();
@@ -119,12 +131,26 @@ public class Jack {
                 + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
     }
 
-    public static void main(String[] args) {
+    private static void handleList(List<Task> tasks) {
+        if (tasks.isEmpty()) {
+            echo("\tHere are the tasks in your list:\n\t  (no tasks yet)");
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                sb.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString());
+                if (i < tasks.size() - 1) {
+                    sb.append("\n");
+                }
+            }
+            echo(sb.toString());
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Jack app = new Jack();
         Scanner scanner = new Scanner(System.in);
 
         printWelcomeMessage();
-
-        ArrayList<Task> tasks = new ArrayList<>();
 
         while (true) {
             String userInput = scanner.nextLine();
@@ -142,20 +168,11 @@ public class Jack {
             String cmd = part[0];                         // e.g., "todo"
             String argument = (part.length > 1) ? part[1].trim() : ""; // e.g., "buy milk"
 
+            List<Task> tasks = app.tasks;
+
             switch (cmd) {
                 case "list": {
-                    if (tasks.isEmpty()) {
-                        echo("\tHere are the tasks in your list:\n\t  (no tasks yet)");
-                    } else {
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i < tasks.size(); i++) {
-                            sb.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString());
-                            if (i < tasks.size() - 1) {
-                                sb.append("\n");
-                            }
-                        }
-                        echo(sb.toString());
-                    }
+                    handleList(tasks);
                     break;
                 }
                 case "bye": {
@@ -163,40 +180,45 @@ public class Jack {
                     scanner.close();
                     return;
                 }
-
                 case "mark": {
                     int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                     tasks.get(index).completed();
+                    STORAGE.saveFile(tasks);
                     markCompleted("\t" + tasks.get(index).toString());
                     break;
                 }
                 case "unmark": {
                     int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                     tasks.get(index).unmark();
+                    STORAGE.saveFile(tasks);
                     unmarkCompleted("\t" + tasks.get(index).toString());
                     break;
                 }
                 case "todo": {
                     // Error handling for empty description of todo
                     handleToDo(tasks, argument);
+                    STORAGE.saveFile(tasks);
                     break;
                 }
                 case "deadline": {
                     handleDeadlineTask(tasks, argument);
+                    STORAGE.saveFile(tasks);
                     break;
                 }
                 case ("event"): {
                     handleEventTask(tasks, argument);
+                    STORAGE.saveFile(tasks);
                     break;
                 }
                 case "delete": {
                     int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                     handleDelete(tasks, index);
+                    STORAGE.saveFile(tasks);
                     break;
                 }
                 default: {
-
-                    tasks.add(new Task(userInput));
+                    tasks.add(new Todo(userInput));
+                    STORAGE.saveFile(tasks);
                     echo("\t" + userInput);
                     break;
                 }

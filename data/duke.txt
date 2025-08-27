@@ -1,0 +1,6 @@
+T|0|wak
+T|0|run
+T|0|fly
+T|0|run
+T|0|walk
+T|0|run
