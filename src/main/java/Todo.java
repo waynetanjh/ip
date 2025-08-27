@@ -1,4 +1,5 @@
 public class Todo extends Task {
+    private String description;
 
     public Todo(String description) {
         super(description);
