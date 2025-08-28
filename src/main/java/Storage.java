@@ -59,7 +59,7 @@ public class Storage {
             return String.join("|", "T", done, task.getDescription());
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return String.join(" | ", "D", done, d.getDescription(), d.getDueDay());
+            return String.join(" | ", "D", done, d.getDescription(), d.getDueIso());
         } else if (task instanceof Event) {
             Event e = (Event) task;
             return String.join(" | ", "E", done, e.getDescription(), e.getFrom(), e.getTo());
