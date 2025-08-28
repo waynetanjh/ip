@@ -1,7 +1,6 @@
-import com.sun.java.accessibility.util.GUIInitializedListener;
+package jack;
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class Jack {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Jack app = new Jack();
         Scanner scanner = new Scanner(System.in);
 
@@ -46,7 +45,7 @@ public class Jack {
 
             if (Parser.parseAndExecute(cmd, app.tasks, STORAGE, scanner, argument, userInput)) {
                 return;
-            };
+            }
         }
     }
 }
