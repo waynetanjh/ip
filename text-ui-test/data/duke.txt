@@ -1,0 +1,9 @@
+T|0|borrow book
+T|0|borrow book
+T|0|borrow book
+T|0|go for a walk
+E | 0 | project meeting | Mon 2pm | 4pm
+T|0|borrow book
+D | 0 | return book | 2019-12-02T18:00
+T|0|go for a walk
+E | 0 | project meeting | Mon 2pm | 4pm
