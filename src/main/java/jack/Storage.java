@@ -1,10 +1,12 @@
+package jack;
+
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Storage {
@@ -64,7 +66,7 @@ public class Storage {
             Event e = (Event) task;
             return String.join(" | ", "E", done, e.getDescription(), e.getFrom(), e.getTo());
         } else {
-            // Fallback for any other Task type
+            // Fallback for any other jack.model.Task type
             return String.join(" | ", "X", done, task.toString());
         }
     }
