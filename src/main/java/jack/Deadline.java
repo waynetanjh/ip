@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 public class Deadline extends Task{
     public LocalDateTime due;
 
+    /**
+        * Creates a new deadline task.
+        * @param description The description of deadline task
+        * @param dueDay The due date/time of the deadline task
+     */
     public Deadline(String description, String dueDay) {
         super(description);
         this.due = Dates.parseDeadline(dueDay);

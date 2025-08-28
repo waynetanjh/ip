@@ -17,8 +17,8 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation message that the task has been marked as completed
-     * @param text the task represented as a string
+     * Prints confirmation message when task has been marked as completed
+     * @param text string representation of the task
      */
     static void markCompleted(String text) {
         System.out.println("\t" + LINE);
@@ -28,8 +28,8 @@ public class Ui {
     }
 
     /**
-     * Prints a confirmation message that the task has been marked as uncompleted
-     * @param text the string representation of the task
+     * Prints a confirmation message when task has been marked as uncompleted
+     * @param text string representation of the task
      */
     public static void unmarkCompleted(String text) {
         System.out.println("\t" + LINE);
@@ -38,12 +38,19 @@ public class Ui {
         System.out.println("\t" + LINE);
     }
 
+    /**
+     * Prints a message with the text wrapped in lines
+     * @param text string representation of the message
+     */
     public static void echo(String text) {
         System.out.println("\t" + LINE);
         System.out.println(text);
         System.out.println("\t" + LINE);
     }
 
+    /**
+     * Prints goodbye message
+     */
     public static void showBye() {
         echo("\tBye. Hope to see you again soon!");
     }
@@ -59,12 +66,21 @@ public class Ui {
                 + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Adds deadline task to the list and prints confirmation message
+     * @param tasks list of tasks
+     * @param numberOfTasks total number of tasks in the list
+     */
     public static void handleDeadlineTask(List<Task> tasks, int numberOfTasks) {
         echo("\tGot it. I've added this task:\n\t  "
                     + tasks.get(numberOfTasks - 1)
                     + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
     }
 
+    /**
+     * Adds todo task to the list and prints confirmation message
+     * @param tasks list of tasks
+     */
     public static void handleToDo(List<Task> tasks) {
         echo("\tGot it. I've added this task:\n\t  "
                 + tasks.get(tasks.size() - 1)

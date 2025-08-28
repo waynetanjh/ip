@@ -12,6 +12,10 @@ import java.util.Scanner;
 public class Storage {
     private final Path file;
 
+    /**
+     * Creates a new Storage instance that manages the specified file.
+     * @param relativePath The relative path to the storage file
+     */
     public Storage(String relativePath) {
         this.file = Paths.get(relativePath);
     }
@@ -26,6 +30,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current list of tasks to the storage file.
+     * Each task is encoded before saving.
+     *
+     * @param tasks The list of tasks to save
+     */
     public void saveFile(List<Task> tasks) {
         try {
             ensureFileExists();

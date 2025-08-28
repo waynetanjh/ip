@@ -10,12 +10,9 @@ public class Parser {
     }
 
     /**
-     * Handles the addition of a {@code Todo} task to the task list.
-     * <p>
-     * If the description after todo is missing or blank, the task is not added and warning will be printed.
-     *
-     * @param tasks     the new Todo will be added to this the list of tasks
-     * @param argument  the description part of the todo command is everything after "todo"
+     * Handles the addition of a todo task to the task list.
+     * @param tasks
+     * @param argument
      */
     private static void handleToDo(List<Task> tasks, String argument) {
         if (argument == null || argument.isBlank()) {
@@ -48,9 +45,11 @@ public class Parser {
     }
 
     /**
-     * Handles the addition of the event task to the task list.
-     * @param tasks event task added to this list of tasks
-     * @param argument description of event consisting of from and to date
+     * Handles the addition of an event task to the task list.
+     * Parses the event description and time from the user input.
+     *
+     * @param tasks The list to add the new event to
+     * @param argument The description and timing of the event
      */
     private static void handleEventTask(List<Task> tasks, String argument) {
         String[] parts = argument.split("/from|/to", 3);
