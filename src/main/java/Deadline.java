@@ -1,16 +1,28 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task{
-    public String dueDay;
+    public LocalDateTime due;
 
     public Deadline(String description, String dueDay) {
         super(description);
-        this.dueDay = dueDay;
+        this.due = Dates.parseDeadline(dueDay);
+    }
+
+    public Deadline(String description, LocalDateTime due) {
+        super(description);
+        this.due = due;
     }
 
     public String getDueDay() {
-        return "(by: " + this.dueDay + ")";
+        return "(by: " + this.due + ")";
     }
+
+    public String getDueIso() {
+        return due.toString(); // ISO_LOCAL_DATE_TIME
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + getDueDay();
+        return "[D]" + super.toString() + " " + Dates.format(due);
     }
 }
