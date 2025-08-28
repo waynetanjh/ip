@@ -24,7 +24,7 @@ public class Storage {
         }
     }
 
-    public void saveFile(List<Task> tasks) throws IOException {
+    public void saveFile(List<Task> tasks) {
         try {
             ensureFileExists();
             try (FileWriter fw = new FileWriter(file.toFile())) {
