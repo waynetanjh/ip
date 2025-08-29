@@ -3,12 +3,16 @@ package jack;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TaskList extends ArrayList<Task> {
+    /**
+     * Creates a new empty task list.
+     */
     public TaskList()  {
         super();
     }
 
-    /** Pretty-prints the list the same way your current jack.jack.Ui expects. */
+
     public static String formatList(List<Task> tasks) {
         if (tasks.isEmpty()) {
             Ui.echo("\tHere are the tasks in your list:\n\t  (no tasks yet)");

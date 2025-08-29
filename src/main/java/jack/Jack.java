@@ -9,6 +9,10 @@ public class Jack {
     private static final Storage STORAGE = new Storage("data/duke.txt");
     private final TaskList tasks = new TaskList();
 
+    /**
+     * Initializes the application by loading existing tasks from storage.
+     * If there's an error reading the file, it will be reported to the user.
+     */
     public Jack() {
         try {
             List<Task> loaded = new ArrayList<>();
@@ -21,6 +25,11 @@ public class Jack {
         }
     }
 
+    /**
+     * Main entry point of the application.
+     * Handles the command loop for user interaction and task management.
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         Jack app = new Jack();
         Scanner scanner = new Scanner(System.in);
