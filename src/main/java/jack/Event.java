@@ -1,8 +1,8 @@
 package jack;
 
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    private String startTime;
+    private String endTime;
 
     /**
      * Creates a new event task.
@@ -13,8 +13,8 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.startTime = from;
+        this.endTime = to;
     }
 
     /**
@@ -22,7 +22,7 @@ public class Event extends Task {
      * @return The event's start time/date
      */
     public String getFrom() {
-        return from;
+        return startTime;
     }
 
     /**
@@ -30,11 +30,11 @@ public class Event extends Task {
      * @return The event's end time/date
      */
     public String getTo() {
-        return to;
+        return endTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
 }

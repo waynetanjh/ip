@@ -2,11 +2,12 @@ package jack;
 
 public class Task {
     private String description;
-    private Boolean isDone;
+    private boolean isDone;
 
     /**
      * Creates a new task with the given description.
      * New tasks are initially marked as not done.
+     *
      * @param description The description of the task
      */
     public Task(String description) {
@@ -30,6 +31,7 @@ public class Task {
 
     /**
      * Returns the status of the task as a string.
+     *
      * @return "X" if the task is done, " " if not done
      */
     public String getStatusString() {
@@ -43,6 +45,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return The task description
      */
     public String getDescription() {

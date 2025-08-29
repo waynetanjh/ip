@@ -11,6 +11,7 @@ public class Parser {
 
     /**
      * Handles the addition of a todo task to the task list.
+     *
      * @param tasks
      * @param argument
      */
@@ -27,6 +28,7 @@ public class Parser {
 
     /**
      * Handles the addition of a deadline task to the task list.
+     *
      * @param tasks new deadline tasks are added to this list of tasks
      * @param argument description of the deadline task
      */
@@ -53,10 +55,10 @@ public class Parser {
      */
     private static void handleEventTask(List<Task> tasks, String argument) {
         String[] parts = argument.split("/from|/to", 3);
-        String desc = parts[0].trim();
-        String from = parts[1].trim();
-        String to = parts[2].trim();
-        tasks.add(new Event(desc, from, to));
+        String description = parts[0].trim();
+        String fromTime = parts[1].trim();
+        String toTime = parts[2].trim();
+        tasks.add(new Event(description, fromTime, toTime));
         int numberOfTasks = tasks.size();
 
         Ui.handleEventTask(tasks, numberOfTasks);
@@ -66,7 +68,7 @@ public class Parser {
         Ui.echo(TaskList.formatList(tasks));
     }
 
-    public static boolean parseAndExecute(String input, List<Task> tasks, Storage STORAGE,
+    public static boolean parseAndExecute(String input, List<Task> tasks, Storage storage,
                                           Scanner scanner, String argument, String userInput) {
         switch (input) {
             case "list": {
@@ -81,42 +83,42 @@ public class Parser {
             case "mark": {
                 int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 tasks.get(index).completed();
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 Ui.markCompleted("\t" + tasks.get(index).toString());
                 break;
             }
             case "unmark": {
                 int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 tasks.get(index).unmark();
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 Ui.unmarkCompleted("\t" + tasks.get(index).toString());
                 break;
             }
             case "todo": {
                 // Error handling for empty description of todo
                 handleToDo(tasks, argument);
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 break;
             }
             case "deadline": {
                 handleDeadlineTask(tasks, argument);
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 break;
             }
             case ("event"): {
                 handleEventTask(tasks, argument);
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 break;
             }
             case "delete": {
                 int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 handleDelete(tasks, index);
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 break;
             }
             default: {
                 tasks.add(new Todo(userInput));
-                STORAGE.saveFile(tasks);
+                storage.saveFile(tasks);
                 Ui.echo("\t" + userInput);
                 break;
             }

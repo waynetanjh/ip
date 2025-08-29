@@ -1,11 +1,11 @@
 package jack;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Dates {
     private Dates() {
-
     }
 
     private static final DateTimeFormatter TIME_FORMATTER =
@@ -22,13 +22,13 @@ public class Dates {
     }
 
     public static LocalDateTime parseDeadline(String date) {
-        String s = date.trim();
-        if (s.contains(" ")) {
+        String inputDate = date.trim();
+        if (inputDate.contains(" ")) {
             // assume dd/MM/uuuu HHmm
-            return LocalDateTime.parse(s, TIME_FORMATTER);
+            return LocalDateTime.parse(inputDate, TIME_FORMATTER);
         } else {
             // assume uuuu-MM-dd -> midnight
-            return LocalDate.parse(s, DATE_ONLY).atStartOfDay();
+            return LocalDate.parse(inputDate, DATE_ONLY).atStartOfDay();
         }
     }
 }
