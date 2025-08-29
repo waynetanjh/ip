@@ -1,11 +1,10 @@
 package jack;
 
 public class Todo extends Task {
-    private String description;
-
     /**
      * Create a new Todo task
-     * @param description
+     *
+     * @param description The description of the todo task
      */
     public Todo(String description) {
         super(description);
@@ -15,6 +14,4 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
-
-
 }

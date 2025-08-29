@@ -2,13 +2,14 @@ package jack;
 
 import java.time.LocalDateTime;
 
-public class Deadline extends Task{
-    public LocalDateTime due;
+public class Deadline extends Task {
+    private LocalDateTime due;
 
     /**
-        * Creates a new deadline task.
-        * @param description The description of deadline task
-        * @param dueDay The due date/time of the deadline task
+     * Creates a new deadline task.
+     *
+     * @param description The description of deadline task
+     * @param dueDay The due date/time of the deadline task
      */
     public Deadline(String description, String dueDay) {
         super(description);
@@ -21,7 +22,7 @@ public class Deadline extends Task{
     }
 
     public String getDueDay() {
-        return "(by: " + this.due + ")";
+        return "(by: " + Dates.format(this.due) + ")";
     }
 
     public String getDueIso() {
@@ -30,6 +31,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + Dates.format(due);
+        return "[D]" + super.toString() + " " + getDueDay();
     }
 }

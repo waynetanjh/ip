@@ -14,6 +14,7 @@ public class Storage {
 
     /**
      * Creates a new Storage instance that manages the specified file.
+     *
      * @param relativePath The relative path to the storage file
      */
     public Storage(String relativePath) {
@@ -44,7 +45,6 @@ public class Storage {
                     fw.write(encode(t) + System.lineSeparator());
                 }
             }
-            ;
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

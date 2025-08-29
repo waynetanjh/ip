@@ -17,8 +17,8 @@ public class Jack {
         try {
             List<Task> loaded = new ArrayList<>();
             STORAGE.loadFile(loaded);
-            for (Task t : loaded) {
-                tasks.add(t);
+            for (Task task : loaded) {
+                tasks.add(task);
             }
         } catch (IOException e) {
             System.out.println("Error reading file");
@@ -28,12 +28,12 @@ public class Jack {
     /**
      * Main entry point of the application.
      * Handles the command loop for user interaction and task management.
+     *
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
         Jack app = new Jack();
         Scanner scanner = new Scanner(System.in);
-
         Ui.printWelcomeMessage();
 
         while (true) {
