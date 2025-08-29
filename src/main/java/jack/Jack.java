@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Jack {
+    /** The storage file for saving and loading tasks */
     private static final Storage STORAGE = new Storage("data/duke.txt");
+    /** The list of tasks managed by the application */
     private final TaskList tasks = new TaskList();
 
     /**
@@ -49,10 +51,11 @@ public class Jack {
             }
 
             String[] part = userInput.split("\\s+", 2);
-            String cmd = part[0];                         // e.g., "todo"
-            String argument = (part.length > 1) ? part[1].trim() : ""; // e.g., "buy milk"
+            String cmd = part[0]; // e.g., "todo"
+            String argument = (part.length > 1) ? part[1].trim() : "";
 
-            if (Parser.parseAndExecute(cmd, app.tasks, STORAGE, scanner, argument, userInput)) {
+            if (Parser.parseAndExecute(cmd, app.tasks, STORAGE,
+                                       scanner, argument, userInput)) {
                 return;
             }
         }

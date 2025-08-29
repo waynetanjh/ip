@@ -40,4 +40,18 @@ public class TaskList extends ArrayList<Task> {
         }
         return tasks.remove(index);
     }
+
+    public static void find(List<Task> tasks, String keyword) {
+        List<Task> matchedTasks = tasks.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .toList();
+
+        if (matchedTasks.isEmpty()) {
+            Ui.echo("\tNo matching tasks found.");
+        } else {
+            Ui.echo("\tHere are the matching tasks in your list:\n"
+                    + TaskList.formatList(matchedTasks));
+        }
+    }
+
 }

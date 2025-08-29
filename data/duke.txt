@@ -1,5 +1,4 @@
 T|0|wak
-T|0|run
 T|0|fly
-T|1|run
-T|0|lit
+T|0|go for a walk
+E | 0 | project meeting | Mon 2pm | 4pm

@@ -71,57 +71,63 @@ public class Parser {
     public static boolean parseAndExecute(String input, List<Task> tasks, Storage storage,
                                           Scanner scanner, String argument, String userInput) {
         switch (input) {
-            case "list": {
-                handleList(tasks);
-                break;
-            }
-            case "bye": {
-                Ui.showBye();
-                scanner.close();
-                return true;
-            }
-            case "mark": {
-                int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                tasks.get(index).completed();
-                storage.saveFile(tasks);
-                Ui.markCompleted("\t" + tasks.get(index).toString());
-                break;
-            }
-            case "unmark": {
-                int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                tasks.get(index).unmark();
-                storage.saveFile(tasks);
-                Ui.unmarkCompleted("\t" + tasks.get(index).toString());
-                break;
-            }
-            case "todo": {
-                // Error handling for empty description of todo
-                handleToDo(tasks, argument);
-                storage.saveFile(tasks);
-                break;
-            }
-            case "deadline": {
-                handleDeadlineTask(tasks, argument);
-                storage.saveFile(tasks);
-                break;
-            }
-            case ("event"): {
-                handleEventTask(tasks, argument);
-                storage.saveFile(tasks);
-                break;
-            }
-            case "delete": {
-                int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                handleDelete(tasks, index);
-                storage.saveFile(tasks);
-                break;
-            }
-            default: {
-                tasks.add(new Todo(userInput));
-                storage.saveFile(tasks);
-                Ui.echo("\t" + userInput);
-                break;
-            }
+        case "list": {
+            handleList(tasks);
+            break;
+        }
+        case "bye": {
+            Ui.showBye();
+            scanner.close();
+            return true;
+        }
+        case "mark": {
+            int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+            tasks.get(index).completed();
+            storage.saveFile(tasks);
+            Ui.markCompleted("\t" + tasks.get(index).toString());
+            break;
+        }
+        case "unmark": {
+            int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+            tasks.get(index).unmark();
+            storage.saveFile(tasks);
+            Ui.unmarkCompleted("\t" + tasks.get(index).toString());
+            break;
+        }
+        case "todo": {
+            // Error handling for empty description of todo
+            handleToDo(tasks, argument);
+            storage.saveFile(tasks);
+            break;
+        }
+        case "deadline": {
+            handleDeadlineTask(tasks, argument);
+            storage.saveFile(tasks);
+            break;
+        }
+        case ("event"): {
+            handleEventTask(tasks, argument);
+            storage.saveFile(tasks);
+            break;
+        }
+        case "delete": {
+            int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+            handleDelete(tasks, index);
+            storage.saveFile(tasks);
+            break;
+        }
+        case "find": {
+            String keyword = userInput.split(" ", 2)[1].trim();
+
+            TaskList.find(tasks, keyword);
+            break;
+        }
+        default: {
+            tasks.add(new Todo(userInput));
+            storage.saveFile(tasks);
+            Ui.echo("\t" + userInput);
+            break;
+        }
         }
         return false;
     }
