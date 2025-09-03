@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class for the Jack task management application.
+ * Handles user interaction and command processing.
+ */
 public class Jack {
     /** The storage file for saving and loading tasks */
     private static final Storage STORAGE = new Storage("data/duke.txt");
