@@ -64,4 +64,36 @@ public class Jack {
             }
         }
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String userInput) {
+        if (userInput.isEmpty()) {
+            Ui.echo("\tEnter a valid task\n\t");
+        }
+
+        if (userInput.equals("blah")) {
+            Ui.echo("\tEnter a valid task\n\t");
+        }
+
+        String[] part = userInput.split("\\s+", 2);
+        String cmd = part[0]; // e.g., "todo"
+        String argument = (part.length > 1) ? part[1].trim() : "";
+
+        StringBuilder response = new StringBuilder();
+
+        if (cmd.equals("bye")) {
+            return "Bye. Hope to see you again soon!";
+        }
+        // Use the same parser logic as main
+        boolean isExit = Parser.parseAndExecute(cmd, tasks, STORAGE, null, argument, userInput);
+
+        // Get the result from parser and format it for display
+        for (int i = 0; i < tasks.size(); i++) {
+            response.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+        }
+
+        return response.toString();
+    }
 }

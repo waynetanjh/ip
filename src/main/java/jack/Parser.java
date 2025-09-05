@@ -77,7 +77,6 @@ public class Parser {
         }
         case "bye": {
             Ui.showBye();
-            scanner.close();
             return true;
         }
         case "mark": {
