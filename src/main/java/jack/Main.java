@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * The main entry point for the Jack application.
  */
 public class Main extends Application {
-    private static final String DEFAULT_FILE_PATH = "duke";
+    private static final String DEFAULT_FILE_PATH = "jack";
     private Jack jack = new Jack();
     // Existing constructor
     public Main(String filePath) {

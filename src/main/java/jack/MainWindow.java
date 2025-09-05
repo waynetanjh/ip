@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import javax.smartcardio.CommandAPDU;
+
 /**
  * Controller for the main GUI.
  */
@@ -21,7 +23,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Jack duke;
+    private Jack jack;
+    private Parser parser;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -32,8 +35,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /** Injects the Duke instance */
-    public void setDuke(Jack d) {
-        duke = d;
+    public void setDuke(Jack j) {
+        this.jack = j;
+        this.parser = new Parser();
     }
 
     /**
@@ -43,9 +47,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+        String response;
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(input, userImage)
+        );
+
+        try {
+            response = jack.getResponse(input);
+        } catch (Exception e) {
+            response = e.getMessage();
+
+        }
+        dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
