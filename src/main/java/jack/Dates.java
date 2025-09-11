@@ -22,6 +22,7 @@ public class Dates {
     }
 
     public static LocalDateTime parseDeadline(String date) {
+        assert date != null : "Date string cannot be null";
         String inputDate = date.trim();
         if (inputDate.contains(" ")) {
             // assume dd/MM/uuuu HHmm

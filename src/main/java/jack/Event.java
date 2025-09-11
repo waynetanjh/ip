@@ -13,6 +13,7 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
+        assert !from.trim().isEmpty() && !to.trim().isEmpty() : "Event times cannot be empty";
         this.startTime = from;
         this.endTime = to;
     }

@@ -2,6 +2,9 @@ package jack;
 
 import java.util.List;
 
+/**
+ * UI class handles the interactions with user
+ */
 public class Ui {
     private static final String LINE = "-----------------------------------------";
 
@@ -10,10 +13,12 @@ public class Ui {
      */
     public static void printWelcomeMessage() {
         String name = "Jack";
-        System.out.println(LINE);
-        System.out.println("Hello! I'm " + name);
-        System.out.println("What can I do for you?");
-        System.out.println(LINE);
+        showMessage(
+                LINE,
+                "Hello! I'm " + name,
+                "What can I do for you?",
+                LINE
+        );
     }
 
     /**
@@ -22,10 +27,12 @@ public class Ui {
      * @param text string representation of the task
      */
     public static void markCompleted(String text) {
-        System.out.println("\t" + LINE);
-        System.out.println("\t" + "Nice! I've marked this task as done:");
-        System.out.println(" " + text);
-        System.out.println("\t" + LINE);
+        showMessage(
+                "\t" + LINE,
+                "\t" + "Nice! I've marked this task as done:",
+                " " + text,
+                "\t" + LINE
+        );
     }
 
     /**
@@ -90,5 +97,14 @@ public class Ui {
         echo("\tGot it. I've added this task:\n\t  "
                 + tasks.get(tasks.size() - 1)
                 + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+    }
+
+    /**
+     * Prints each message on a new line
+     */
+    public static void showMessage(String... messages) {
+        for (String message : messages) {
+            System.out.println(message);
+        }
     }
 }
