@@ -65,6 +65,12 @@ public class Ui {
         echo("\tBye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints confirmation message when task has been deleted
+     *
+     * @param removed   string representation of the removed task
+     * @param remaining number of tasks remaining in the list
+     */
     public static void showDeleted(Task removed, int remaining) {
         echo("\tNoted. I've removed this task:\n\t  "
                 + removed + "\n\tNow you have " + remaining + " tasks in the list.");
