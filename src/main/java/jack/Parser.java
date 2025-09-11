@@ -38,6 +38,7 @@ public class Parser {
             return;
         }
         String[] parts = argument.split("/by", 2);
+        assert parts.length == 2 : "Deadline task must have both description and due date";
         String desc = parts[0].trim();
         String by = parts[1].trim();
         tasks.add(new Deadline(desc, by));
@@ -54,7 +55,9 @@ public class Parser {
      * @param argument The description and timing of the event
      */
     private static void handleEventTask(List<Task> tasks, String argument) {
+        assert argument != null && !argument.isBlank() : "Event argument cannot be null or empty";
         String[] parts = argument.split("/from|/to", 3);
+        assert parts.length == 3 : "Event must have description, start time (/from), and end time (/to)";
         String description = parts[0].trim();
         String fromTime = parts[1].trim();
         String toTime = parts[2].trim();

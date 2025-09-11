@@ -2,7 +2,12 @@ package jack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Represents a list of tasks that can be managed by the application.
+ * Extends ArrayList to provide task-specific operations.
+ */
 public class TaskList extends ArrayList<Task> {
     /**
      * Creates a new empty task list.
@@ -18,6 +23,8 @@ public class TaskList extends ArrayList<Task> {
      * @return A formatted string representation of the task list
      */
     public static String formatList(List<Task> tasks) {
+        assert tasks != null : "Tasks cannot be null";
+
         if (tasks.isEmpty()) {
             Ui.echo("\tHere are the tasks in your list:\n\t  (no tasks yet)");
         }
@@ -31,17 +38,38 @@ public class TaskList extends ArrayList<Task> {
         return sb.toString();
     }
 
+    /**
+     * Handles deletion of a task from the list.
+     * @param tasks list of tasks
+     * @param index
+     * @return
+     */
     public static Task handleDelete(List<Task> tasks, int index) {
+        // Assert that tasks list is not null before any operation
+        assert tasks != null : "Tasks list cannot be null";
+
         if (tasks.isEmpty()) {
             throw new IllegalArgumentException("No tasks to delete");
         }
         if (index < 0 || index >= tasks.size()) {
             throw new IllegalArgumentException("Index out of range: " + (index + 1));
         }
-        return tasks.remove(index);
+        Task removedTask = tasks.remove(index);
+        // Assert that the task was actually removed
+        assert !tasks.contains(removedTask) : "Task was not properly removed";
+        return removedTask;
     }
 
+    /**
+     * Find and display matching tasks
+     * @param tasks list of tasks
+     * @param keyword search keyword
+     */
     public static void find(List<Task> tasks, String keyword) {
+        // Assert that both parameters are not null
+        assert tasks != null : "Tasks list cannot be null";
+        assert keyword != null : "Search keyword cannot be null";
+
         List<Task> matchedTasks = tasks.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .toList();

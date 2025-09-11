@@ -6,6 +6,6 @@ T|0|hello
 T|0|hello
 T|0|hi
 T|0|test
-T|0|
-T|0|
 T|0|i want to go for a walk
+T|0|hi
+T|0|hi

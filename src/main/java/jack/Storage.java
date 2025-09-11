@@ -7,8 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Handles the persistence of tasks to and from storage.
+ * Provides methods for saving and loading tasks from a file.
+ */
 public class Storage {
     private final Path file;
 
@@ -38,6 +43,7 @@ public class Storage {
      * @param tasks The list of tasks to save
      */
     public void saveFile(List<Task> tasks) {
+        assert tasks != null && tasks.stream().allMatch(Objects::nonNull) : "Tasks list cannot be null or contain null tasks";
         try {
             ensureFileExists();
             try (FileWriter fw = new FileWriter(file.toFile())) {
