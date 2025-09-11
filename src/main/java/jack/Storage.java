@@ -7,12 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Handles the persistence of tasks to and from storage.
- * Provides methods for saving and loading tasks from a file.
+ * Storage class handles loading and saving of tasks to a file.
  */
 public class Storage {
     private final Path file;
@@ -43,7 +41,8 @@ public class Storage {
      * @param tasks The list of tasks to save
      */
     public void saveFile(List<Task> tasks) {
-        assert tasks != null && tasks.stream().allMatch(Objects::nonNull) : "Tasks list cannot be null or contain null tasks";
+        assert tasks != null : "Tasks list cannot be null";
+        assert tasks.stream().allMatch(t -> t != null) : "Tasks list cannot contain null tasks";
         try {
             ensureFileExists();
             try (FileWriter fw = new FileWriter(file.toFile())) {
@@ -71,6 +70,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Encode a Task object into a string for storage.
+     * @param task
+     * @return
+     */
     public String encode(Task task) {
         String done = String.valueOf(task.isDone() ? 1 : 0);
         if (task instanceof Todo) {
@@ -87,49 +91,66 @@ public class Storage {
         }
     }
 
+    /**
+     * Decodes a line from the storage file into a Task object.
+     * @param line
+     * @return
+     */
     public Task decode(String line) {
         if (line == null) {
             return null;
         }
         String[] p = line.split("\\s*\\|\\s*");
-        if (p.length < 3) return null;
+        if (p.length < 3) {
+            return null;
+        }
 
         String type = p[0];
         String doneFlag = p[1];
 
         try {
             switch (type) {
-                case "T": {
-                    // T | done | desc
-                    String desc = p[2];
-                    Todo t = new Todo(desc);
-                    if ("1".equals(doneFlag)) t.completed();
-                    return t;
+            case "T": {
+                // T | done | desc
+                String desc = p[2];
+                Todo t = new Todo(desc);
+                if ("1".equals(doneFlag)) {
+                    t.completed();
                 }
-                case "D": {
-                    // D | done | desc | by
-                    if (p.length < 4) return null;
-                    String desc = p[2];
-                    String by = p[3];
-                    Deadline d = new Deadline(desc, by);
-                    if ("1".equals(doneFlag)) d.completed();
-                    return d;
-                }
-                case "E": {
-                    // E | done | desc | from | to
-                    if (p.length < 5) return null;
-                    String desc = p[2];
-                    String from = p[3];
-                    String to = p[4];
-                    Event e = new Event(desc, from, to);
-                    if ("1".equals(doneFlag)) e.completed();
-                    return e;
-                }
-                default: {
+                return t;
+            }
+            case "D": {
+                // D | done | desc | by
+                if (p.length < 4) {
                     return null;
                 }
+                String desc = p[2];
+                String by = p[3];
+                Deadline d = new Deadline(desc, by);
+                if ("1".equals(doneFlag)) {
+                    d.completed();
+                }
+                return d;
             }
-        } catch(Exception ex) {
+            case "E": {
+                // E | done | desc | from | to
+                if (p.length < 5) {
+                    return null;
+                }
+                String desc = p[2];
+                String from = p[3];
+                String to = p[4];
+                Event e = new Event(desc, from, to);
+                if ("1".equals(doneFlag)) {
+                    e.completed();
+                }
+                return e;
+            }
+            default: {
+                return null;
+            }
+            }
+        } catch (Exception ex) {
             // Any parsing/constructor error => corrupted
             return null;
         }

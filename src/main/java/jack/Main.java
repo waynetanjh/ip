@@ -27,6 +27,10 @@ public class Main extends Application {
         this(DEFAULT_FILE_PATH);
     }
 
+    /**
+     * Main entry point for the JavaFX application.
+     * @param stage the primary stage for this application
+     */
     @Override
     public void start(Stage stage) {
         try {

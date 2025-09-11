@@ -3,6 +3,9 @@ package jack;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Parser class handles parsing and executing user commands.
+ */
 public class Parser {
     private static void handleDelete(List<Task> tasks, int index) {
         Task removed = TaskList.handleDelete(tasks, index);
@@ -12,11 +15,14 @@ public class Parser {
     /**
      * Handles the addition of a todo task to the task list.
      *
-     * @param tasks
-     * @param argument
+     * @param tasks list that todo tasks are added to
+     * @param argument description of the todo task
      */
     private static void handleToDo(List<Task> tasks, String argument) {
-        if (argument == null || argument.isBlank()) {
+        boolean isNull = argument == null;
+        boolean isBlank = argument != null && argument.isBlank();
+
+        if (isNull || isBlank) {
             Ui.echo("\tOOPS!!! The description of a todo cannot be empty");
             return;
         }

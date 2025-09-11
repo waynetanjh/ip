@@ -21,6 +21,11 @@ public class Dates {
         return dateTime.format(PRETTY_DATE);
     }
 
+    /**
+     * Parses a date string into a LocalDateTime object.
+     * @param date
+     * @return
+     */
     public static LocalDateTime parseDeadline(String date) {
         assert date != null : "Date string cannot be null";
         String inputDate = date.trim();

@@ -1,6 +1,7 @@
 package jack;
 
 public class Event extends Task {
+    private static final String eventMarker = "[E]";
     private String startTime;
     private String endTime;
 
@@ -36,6 +37,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
+        return eventMarker + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
 }
