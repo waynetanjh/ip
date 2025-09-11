@@ -32,6 +32,22 @@ public class Jack {
     }
 
     /**
+     * Displays help information about available commands.
+     */
+    public void showHelp() {
+        Ui.showMessage(
+            "Commands available:",
+            "  list - show all tasks",
+            "  todo <description> - add a todo",
+            "  deadline <description> /by <date> - add a deadline",
+            "  event <description> /at <date> - add an event",
+            "  done <task number> - mark task as done",
+            "  delete <task number> - delete a task",
+            "  help - show this help message"
+        );
+    }
+
+    /**
      * Main entry point of the application.
      * Handles the command loop for user interaction and task management.
      *
@@ -81,14 +97,31 @@ public class Jack {
         String cmd = part[0]; // e.g., "todo"
         String argument = (part.length > 1) ? part[1].trim() : "";
 
-        StringBuilder response = new StringBuilder();
-
         if (cmd.equals("bye")) {
             return "Bye. Hope to see you again soon!";
         }
-        // Use the same parser logic as main
-        boolean isExit = Parser.parseAndExecute(cmd, tasks, STORAGE, null, argument, userInput);
 
+        if (cmd.equals("help")) {
+            return String.join("\n",
+                "Commands available:",
+                "  list - show all tasks",
+                "  todo <description> - add a todo",
+                "  deadline <description> /by <date> - add a deadline",
+                "  event <description> /from <start-date> /to <end-date> - add an event",
+                "  mark <task number> - mark task as done",
+                "  unmark <task number> - mark task as not done",
+                "  done <task number> - mark task as done",
+                "  delete <task number> - delete a task",
+                "  find <keyword> - find tasks containing keyword",
+                "  help - show this help message",
+                "  bye - exit the program"
+            );
+        }
+
+        // Use the same parser logic as main
+        Parser.parseAndExecute(cmd, tasks, STORAGE, null, argument, userInput);
+
+        StringBuilder response = new StringBuilder();
         // Get the result from parser and format it for display
         for (int i = 0; i < tasks.size(); i++) {
             response.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
