@@ -1,5 +1,6 @@
 package jack;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -109,8 +110,6 @@ public class Ui {
      * Prints each message on a new line
      */
     public static void showMessage(String... messages) {
-        for (String message : messages) {
-            System.out.println(message);
-        }
+        Arrays.stream(messages).forEach(System.out::println);
     }
 }
