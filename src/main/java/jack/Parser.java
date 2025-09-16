@@ -90,7 +90,7 @@ public class Parser {
         }
         case "mark": {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
-            tasks.get(index).completed();
+            tasks.get(index).markAsDone();
             storage.saveFile(tasks);
             Ui.markCompleted("\t" + tasks.get(index).toString());
             break;

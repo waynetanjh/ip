@@ -70,11 +70,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Encode a Task object into a string for storage.
-     * @param task
-     * @return
-     */
     public String encode(Task task) {
         String done = String.valueOf(task.isDone() ? 1 : 0);
         if (task instanceof Todo) {
@@ -115,7 +110,7 @@ public class Storage {
                 String desc = p[2];
                 Todo t = new Todo(desc);
                 if ("1".equals(doneFlag)) {
-                    t.completed();
+                    t.markAsDone();
                 }
                 return t;
             }
@@ -128,7 +123,7 @@ public class Storage {
                 String by = p[3];
                 Deadline d = new Deadline(desc, by);
                 if ("1".equals(doneFlag)) {
-                    d.completed();
+                    d.markAsDone();
                 }
                 return d;
             }
@@ -142,7 +137,7 @@ public class Storage {
                 String to = p[4];
                 Event e = new Event(desc, from, to);
                 if ("1".equals(doneFlag)) {
-                    e.completed();
+                    e.markAsDone();
                 }
                 return e;
             }
