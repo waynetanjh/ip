@@ -18,7 +18,7 @@ public class Task {
     /**
      * Marks this task as completed.
      */
-    public void completed() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
