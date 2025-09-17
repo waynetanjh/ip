@@ -37,6 +37,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return eventMarker + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
+        return eventMarker + "[" + (isDone() ? "✓" : "✗") + "] " + getDescription() + " (from: " + startTime + " to: " + endTime + ")";
     }
 }

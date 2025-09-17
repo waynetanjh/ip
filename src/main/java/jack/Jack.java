@@ -71,6 +71,8 @@ public class Jack {
             }
 
             String[] part = userInput.split("\\s+", 2);
+            System.out.println("before");
+            System.out.println("after");
             String cmd = part[0]; // e.g., "todo"
             String argument = (part.length > 1) ? part[1].trim() : "";
 
