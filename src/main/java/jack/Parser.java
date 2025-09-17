@@ -64,6 +64,8 @@ public class Parser {
         assert argument != null && !argument.isBlank() : "Event argument cannot be null or empty";
         String[] parts = argument.split("/from|/to", 3);
         assert parts.length == 3 : "Event must have description, start time (/from), and end time (/to)";
+        System.out.println("before");
+        System.out.println("after");
         String description = parts[0].trim();
         String fromTime = parts[1].trim();
         String toTime = parts[2].trim();
