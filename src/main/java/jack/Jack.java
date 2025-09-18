@@ -104,20 +104,7 @@ public class Jack {
         }
 
         if (cmd.equals("help")) {
-            return String.join("\n",
-                "Commands available:",
-                "  list - show all tasks",
-                "  todo <description> - add a todo",
-                "  deadline <description> /by <date> - add a deadline",
-                "  event <description> /from <start-date> /to <end-date> - add an event",
-                "  mark <task number> - mark task as done",
-                "  unmark <task number> - mark task as not done",
-                "  done <task number> - mark task as done",
-                "  delete <task number> - delete a task",
-                "  find <keyword> - find tasks containing keyword",
-                "  help - show this help message",
-                "  bye - exit the program"
-            );
+            return Ui.showHelp();
         }
 
         // Use the same parser logic as main

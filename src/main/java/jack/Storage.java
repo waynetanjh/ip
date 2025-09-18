@@ -112,39 +112,15 @@ public class Storage {
             switch (type) {
             case "T": {
                 // T | done | desc
-                String desc = p[2];
-                Todo t = new Todo(desc);
-                if ("1".equals(doneFlag)) {
-                    t.markAsDone();
-                }
-                return t;
+                return decodeToDo(p, doneFlag);
             }
             case "D": {
                 // D | done | desc | by
-                if (p.length < 4) {
-                    return null;
-                }
-                String desc = p[2];
-                String by = p[3];
-                Deadline d = new Deadline(desc, by);
-                if ("1".equals(doneFlag)) {
-                    d.markAsDone();
-                }
-                return d;
+                return decodeDeadline(p, doneFlag);
             }
             case "E": {
                 // E | done | desc | from | to
-                if (p.length < 5) {
-                    return null;
-                }
-                String desc = p[2];
-                String from = p[3];
-                String to = p[4];
-                Event e = new Event(desc, from, to);
-                if ("1".equals(doneFlag)) {
-                    e.markAsDone();
-                }
-                return e;
+                return decodeEvent(p, doneFlag);
             }
             default: {
                 return null;
@@ -154,5 +130,59 @@ public class Storage {
             // Any parsing/constructor error => corrupted
             return null;
         }
+    }
+
+    /**
+     * Decodes a Todo task from the given parameters.
+     * @param p array of parameters
+     * @param doneFlag flag indicating if the task is done
+     * @return the decoded Todo task
+     */
+    private Task decodeToDo(String[] p, String doneFlag) {
+        // T | done | desc
+        String desc = p[2];
+        Todo t = new Todo(desc);
+        if ("1".equals(doneFlag)) {
+            t.markAsDone();
+        }
+        return t;
+    }
+
+    /**
+     * Decodes a Deadline task from the given parameters.
+     * @param p array of parameters
+     * @param doneFlag flag indicating if the task is done
+     * @return the decoded Deadline task, or null if parameters are invalid
+     */
+    private Task decodeDeadline(String[] p, String doneFlag) {
+        if (p.length < 4) {
+            return null;
+        }
+        String desc = p[2];
+        String by = p[3];
+        Deadline d = new Deadline(desc, by);
+        if ("1".equals(doneFlag)) {
+            d.markAsDone();
+        }
+        return d;
+    }
+
+    /**
+     * Decodes an Event task from the given parameters.
+     * @param p array of parameters
+     * @param doneFlag flag indicating if the task is done
+     */
+    private Task decodeEvent(String[] p, String doneFlag) {
+        if (p.length < 5) {
+            return null;
+        }
+        String desc = p[2];
+        String from = p[3];
+        String to = p[4];
+        Event e = new Event(desc, from, to);
+        if ("1".equals(doneFlag)) {
+            e.markAsDone();
+        }
+        return e;
     }
 }
