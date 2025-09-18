@@ -26,11 +26,12 @@ public class TaskList extends ArrayList<Task> {
         assert tasks != null : "Tasks cannot be null";
 
         if (tasks.isEmpty()) {
-            Ui.echo("\tHere are the tasks in your list:\n\t  (no tasks yet)");
+            return "Argh: no tasks yet";
         }
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString());
+            sb.append(i + 1).append(".").append(tasks.get(i).toString());
             if (i < tasks.size() - 1) {
                 sb.append("\n");
             }
@@ -61,29 +62,6 @@ public class TaskList extends ArrayList<Task> {
         return removedTask;
     }
 
-    /**
-     * Finds and display matching tasks
-     *
-     * @param tasks list of tasks
-     * @param keyword search keyword
-     */
-    public static void find(List<Task> tasks, String keyword) {
-        // Assert that both parameters are not null
-        assert tasks != null : "Tasks list cannot be null";
-        assert keyword != null : "Search keyword cannot be null";
-
-        List<Task> matchedTasks = tasks.stream()
-                .filter(task -> task.getDescription().toLowerCase()
-                            .contains(keyword))
-                .toList();
-
-        if (matchedTasks.isEmpty()) {
-            Ui.echo("\tNo matching tasks found.");
-        } else {
-            Ui.echo("\tHere are the matching tasks in your list:\n"
-                    + TaskList.formatList(matchedTasks));
-        }
-    }
 
     /**
      * Finds tasks containing the specified keyword (case-insensitive).
@@ -105,7 +83,15 @@ public class TaskList extends ArrayList<Task> {
         if (matched.isEmpty()) {
             return "No matching tasks found.";
         }
-        return "Here are the matching tasks in your list:\n" + TaskList.formatList(matched);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matched.size(); i++) {
+            sb.append(i + 1).append(".").append(matched.get(i).toString());
+            if (i < matched.size() - 1) {
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
     }
 
 }

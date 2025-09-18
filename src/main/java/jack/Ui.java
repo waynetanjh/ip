@@ -1,122 +1,62 @@
 package jack;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * Handles the interactions with user
+ * Handles UI messages for the GUI application
  */
 public class Ui {
-    private static final String LINE = "-----------------------------------------";
 
     /**
-     * Prints a welcome message when program starts
-     */
-    public static void printWelcomeMessage() {
-        String name = "Jack";
-        showMessage(
-                LINE,
-                "Hello! I'm " + name,
-                "What can I do for you?",
-                LINE
-        );
-    }
-
-    /**
-     * Prints confirmation message when task has been marked as completed
+     * Returns confirmation message when task has been marked as completed
      *
-     * @param text string representation of the task
+     * @return confirmation message
      */
-    public static void markCompleted(String text) {
-        showMessage(
-                "\t" + LINE,
-                "\t" + "Nice! I've marked this task as done:",
-                " " + text,
-                "\t" + LINE
-        );
+    public static String getMarkCompletedMessage() {
+        return "Nice! I've marked this task as done.";
     }
 
     /**
-     * Prints a confirmation message when task has been marked as uncompleted
+     * Returns confirmation message when task has been marked as uncompleted
      *
-     * @param text string representation of the task
+     * @return confirmation message
      */
-    public static void unmarkCompleted(String text) {
-        System.out.println("\t" + LINE);
-        System.out.println("\t" + "OK, I've marked this task as not done yet:");
-        System.out.println(" " + text);
-        System.out.println("\t" + LINE);
+    public static String getUnmarkCompletedMessage() {
+        return "OK, I've marked this task as not done yet.";
     }
 
     /**
-     * Prints a message with the text wrapped in lines
+     * Returns confirmation message when task has been deleted
      *
-     * @param text string representation of the message
+     * @return confirmation message
      */
-    public static void echo(String text) {
-        System.out.println("\t" + LINE);
-        System.out.println(text);
-        System.out.println("\t" + LINE);
+    public static String getDeletedMessage() {
+        return "Noted. I've removed this task.";
     }
 
     /**
-     * Prints goodbye message
-     */
-    public static void showBye() {
-        echo("\tBye. Hope to see you again soon!");
-    }
-
-    /**
-     * Prints confirmation message when task has been deleted
+     * Returns confirmation message after event task has been added
      *
-     * @param removed   string representation of the removed task
-     * @param remaining number of tasks remaining in the list
+     * @return confirmation message
      */
-    public static void showDeleted(Task removed, int remaining) {
-        echo("\tNoted. I've removed this task:\n\t  "
-                + removed + "\n\tNow you have " + remaining + " tasks in the list.");
+    public static String getEventTaskMessage() {
+        return "Got it. I've added this task.";
     }
 
     /**
-     * Prints confirmation message after event task has been added
+     * Returns confirmation message after deadline task has been added
      *
-     * @param tasks list of tasks
-     * @param numberOfTasks total number of tasks in the list
+     * @return confirmation message
      */
-    public static void handleEventTask(List<Task> tasks, int numberOfTasks) {
-        echo("\tGot it. I've added this task:\n\t  "
-                + tasks.get(numberOfTasks - 1)
-                + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
+    public static String getDeadlineTaskMessage() {
+        return "Got it. I've added this task.";
     }
 
     /**
-     * Adds deadline task to the list and prints confirmation message
+     * Returns confirmation message after todo task has been added
      *
-     * @param tasks list of tasks
-     * @param numberOfTasks total number of tasks in the list
+     * @return confirmation message
      */
-    public static void handleDeadlineTask(List<Task> tasks, int numberOfTasks) {
-        echo("\tGot it. I've added this task:\n\t  "
-                    + tasks.get(numberOfTasks - 1)
-                    + "\n\tNow you have " + numberOfTasks + " tasks in the list.");
-    }
-
-    /**
-     * Adds todo task to the list and prints confirmation message
-     *
-     * @param tasks list of tasks
-     */
-    public static void handleToDo(List<Task> tasks) {
-        echo("\tGot it. I've added this task:\n\t  "
-                + tasks.get(tasks.size() - 1)
-                + "\n\tNow you have " + tasks.size() + " tasks in the list.");
-    }
-
-    /**
-     * Prints each message on a new line
-     */
-    public static void showMessage(String... messages) {
-        Arrays.stream(messages).forEach(System.out::println);
+    public static String getToDoMessage() {
+        return "Got it. I've added this task.";
     }
 
     /**
@@ -133,7 +73,6 @@ public class Ui {
                 "  event <description> /from <start-date> /to <end-date> - add an event",
                 "  mark <task number> - mark task as done",
                 "  unmark <task number> - mark task as not done",
-                "  done <task number> - mark task as done",
                 "  delete <task number> - delete a task",
                 "  find <keyword> - find tasks containing keyword",
                 "  help - show this help message",

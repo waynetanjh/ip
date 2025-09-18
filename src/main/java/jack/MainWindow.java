@@ -66,7 +66,6 @@ public class MainWindow extends AnchorPane {
             response = jack.getResponse(input);
         } catch (Exception e) {
             response = e.getMessage();
-
         }
         dialogContainer.getChildren().add(
                 DialogBox.getJackDialog(response, jackImage)

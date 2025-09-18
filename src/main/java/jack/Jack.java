@@ -3,7 +3,6 @@ package jack;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Main class for the Jack task management application.
@@ -31,39 +30,6 @@ public class Jack {
         }
     }
 
-    /**
-     * Main entry point of the application.
-     * Handles the command loop for user interaction and task management.
-     *
-     * @param args Command line arguments (not used)
-     */
-    public static void main(String[] args) {
-        Jack app = new Jack();
-        Scanner scanner = new Scanner(System.in);
-        Ui.printWelcomeMessage();
-
-        while (true) {
-            String userInput = scanner.nextLine();
-            if (userInput.isEmpty()) {
-                Ui.echo("\tEnter a valid task\n\t");
-                continue;
-            }
-
-            if (userInput.equals("blah")) {
-                Ui.echo("\tEnter a valid task\n\t");
-                continue;
-            }
-
-            String[] part = userInput.split("\\s+", 2);
-            String cmd = part[0]; // e.g., "todo"
-            String argument = (part.length > 1) ? part[1].trim() : "";
-
-            if (Parser.parseAndExecute(cmd, app.tasks, STORAGE,
-                                       scanner, argument, userInput)) {
-                return;
-            }
-        }
-    }
 
     /**
      * Generates a response for the user's chat message.
@@ -86,11 +52,8 @@ public class Jack {
             return uniqueMessage;
         }
 
-        // Use the same parser logic as main
-        Parser.parseAndExecute(cmd, tasks, STORAGE, null, argument, userInput);
-
-        // Always return the current list of tasks after processing
-        return getTasks(tasks);
+        // Use the parser that returns messages
+        return Parser.parseAndExecute(cmd, tasks, STORAGE, argument, userInput);
     }
 
     /**
@@ -141,9 +104,6 @@ public class Jack {
         }
         if ("help".equals(cmd)) {
             return Ui.showHelp(); // or Ui.helpMessage()
-        }
-        if (cmd.startsWith("find")) {
-            return TaskList.findString(tasks, argument); // <- return matches, not full list
         }
         return null;
     }
