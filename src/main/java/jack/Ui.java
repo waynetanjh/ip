@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * UI class handles the interactions with user
+ * Handles the interactions with user
  */
 public class Ui {
     private static final String LINE = "-----------------------------------------";

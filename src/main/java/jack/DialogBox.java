@@ -26,6 +26,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for DialogBox.
+     *
      * @param text the text to be displayed
      * @param img the image to be displayed
      */
@@ -58,7 +59,14 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Creates a dialog box for Duke's response.
+     *
+     * @param text the text to be displayed
+     * @param img the image to be displayed
+     * @return a DialogBox instance representing Duke's response
+     */
+    public static DialogBox getJackDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

@@ -21,6 +21,7 @@ public class Event extends Task {
 
     /**
      * Gets the start time/date of the event.
+     *
      * @return The event's start time/date
      */
     public String getFrom() {
@@ -29,6 +30,7 @@ public class Event extends Task {
 
     /**
      * Gets the end time/date of the event.
+     *
      * @return The event's end time/date
      */
     public String getTo() {

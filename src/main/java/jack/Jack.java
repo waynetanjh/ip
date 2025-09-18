@@ -32,22 +32,6 @@ public class Jack {
     }
 
     /**
-     * Displays help information about available commands.
-     */
-    public void showHelp() {
-        Ui.showMessage(
-            "Commands available:",
-            "  list - show all tasks",
-            "  todo <description> - add a todo",
-            "  deadline <description> /by <date> - add a deadline",
-            "  event <description> /at <date> - add an event",
-            "  done <task number> - mark task as done",
-            "  delete <task number> - delete a task",
-            "  help - show this help message"
-        );
-    }
-
-    /**
      * Main entry point of the application.
      * Handles the command loop for user interaction and task management.
      *
@@ -99,23 +83,47 @@ public class Jack {
         String cmd = part[0]; // e.g., "todo"
         String argument = (part.length > 1) ? part[1].trim() : "";
 
-        if (cmd.equals("bye")) {
-            return "Bye. Hope to see you again soon!";
-        }
+        // Commands are bye or help only
+        String isSimple = handleSimple(cmd);
 
-        if (cmd.equals("help")) {
-            return Ui.showHelp();
+        if (isSimple != null) {
+            return isSimple;
         }
 
         // Use the same parser logic as main
         Parser.parseAndExecute(cmd, tasks, STORAGE, null, argument, userInput);
 
+        // Always return the current list of tasks after processing
+        return getTasks(tasks);
+    }
+
+    /**
+     * Handles simple commands like "bye" and "help".
+     *
+     * @param cmd the command string
+     * @return response string or null if not a simple command
+     */
+    private static String handleSimple(String cmd) {
+        if ("bye".equals(cmd)) {
+            return "Bye. Hope to see you again soon!";
+        }
+        if ("help".equals(cmd)) {
+            return Ui.showHelp(); // or Ui.helpMessage()
+        }
+        return null;
+    }
+
+    /**
+     * Renders the list of tasks into a formatted string.
+     * @param tasks list of tasks
+     * @return formatted string of tasks
+     */
+    public static String getTasks(List<Task> tasks) {
         StringBuilder response = new StringBuilder();
         // Get the result from parser and format it for display
         for (int i = 0; i < tasks.size(); i++) {
             response.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
         }
-
         return response.toString();
     }
 }

@@ -17,12 +17,19 @@ public class Dates {
     private static final DateTimeFormatter PRETTY_DATE =
             DateTimeFormatter.ofPattern("MMM dd uuuu HH:mm");
 
+    /**
+     * Formats a LocalDateTime object into a human-readable string.
+     *
+     * @param dateTime LocalDateTime object to format
+     * @return Formatted date string
+     */
     public static String format(LocalDateTime dateTime) {
         return dateTime.format(PRETTY_DATE);
     }
 
     /**
      * Parses a date string into a LocalDateTime object.
+     *
      * @param date
      * @return
      */

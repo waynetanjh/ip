@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Storage class handles loading and saving of tasks to a file.
+ * Handles loading and saving of tasks to a file.
  */
 public class Storage {
     private final Path file;
@@ -55,6 +55,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file into the provided list.
+     * Each line in the file is decoded into a Task object.
+     *
+     * @param tasks The list to load tasks into
+     * @throws IOException If there is an error reading the file
+     */
     public void loadFile(List<Task> tasks) throws IOException {
         ensureFileExists();
         try (Scanner scanner = new Scanner(file)) {
@@ -72,6 +79,7 @@ public class Storage {
 
     /**
      * Encodes a Task object into a string for storage
+     *
      * @param task The task to encode
      * @return The encoded string representation of the task
      */
@@ -93,8 +101,9 @@ public class Storage {
 
     /**
      * Decodes a line from the storage file into a Task object.
-     * @param line
-     * @return
+     *
+     * @param line The line to decode
+     * @return The decoded Task object, or null if the line is invalid
      */
     public Task decode(String line) {
         if (line == null) {
@@ -134,6 +143,7 @@ public class Storage {
 
     /**
      * Decodes a Todo task from the given parameters.
+     *
      * @param p array of parameters
      * @param doneFlag flag indicating if the task is done
      * @return the decoded Todo task
@@ -150,6 +160,7 @@ public class Storage {
 
     /**
      * Decodes a Deadline task from the given parameters.
+     *
      * @param p array of parameters
      * @param doneFlag flag indicating if the task is done
      * @return the decoded Deadline task, or null if parameters are invalid
@@ -169,6 +180,7 @@ public class Storage {
 
     /**
      * Decodes an Event task from the given parameters.
+     *
      * @param p array of parameters
      * @param doneFlag flag indicating if the task is done
      */
