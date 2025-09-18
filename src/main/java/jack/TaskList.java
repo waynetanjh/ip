@@ -73,7 +73,8 @@ public class TaskList extends ArrayList<Task> {
         assert keyword != null : "Search keyword cannot be null";
 
         List<Task> matchedTasks = tasks.stream()
-                .filter(task -> task.getDescription().contains(keyword))
+                .filter(task -> task.getDescription().toLowerCase()
+                            .contains(keyword))
                 .toList();
 
         if (matchedTasks.isEmpty()) {
@@ -82,6 +83,29 @@ public class TaskList extends ArrayList<Task> {
             Ui.echo("\tHere are the matching tasks in your list:\n"
                     + TaskList.formatList(matchedTasks));
         }
+    }
+
+    /**
+     * Finds tasks containing the specified keyword (case-insensitive).
+     *
+     * @param tasks   The list of tasks to search
+     * @param keyword The keyword to search for
+     * @return A string listing the matching tasks or a message if none found
+     */
+    public static String findString(List<Task> tasks, String keyword) {
+        String q = keyword == null ? "" : keyword.trim().toLowerCase();
+        if (q.isEmpty()) {
+            return "Usage: find <keyword>";
+        }
+
+        List<Task> matched = tasks.stream()
+                .filter(t -> t.getDescription().toLowerCase().contains(q))
+                .toList();
+
+        if (matched.isEmpty()) {
+            return "No matching tasks found.";
+        }
+        return "Here are the matching tasks in your list:\n" + TaskList.formatList(matched);
     }
 
 }

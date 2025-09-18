@@ -55,8 +55,6 @@ public class Jack {
             }
 
             String[] part = userInput.split("\\s+", 2);
-            System.out.println("before");
-            System.out.println("after");
             String cmd = part[0]; // e.g., "todo"
             String argument = (part.length > 1) ? part[1].trim() : "";
 
@@ -71,23 +69,21 @@ public class Jack {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String userInput) {
-        if (userInput.isEmpty()) {
-            Ui.echo("\tEnter a valid task\n\t");
+        // Handle specific invalid inputs like empty input or "blah"
+        String invalidMessage = handleInvalid(userInput);
+        if (invalidMessage != null) {
+            return invalidMessage;
         }
 
-        if (userInput.equals("blah")) {
-            Ui.echo("\tEnter a valid task\n\t");
-        }
-
-        String[] part = userInput.split("\\s+", 2);
+        String[] part = processInput(userInput);
         String cmd = part[0]; // e.g., "todo"
-        String argument = (part.length > 1) ? part[1].trim() : "";
+        String argument = part[1];
 
-        // Commands are bye or help only
-        String isSimple = handleSimple(cmd);
+        // For bye, help or find commands
+        String uniqueMessage = handleUnique(cmd, tasks, argument);
 
-        if (isSimple != null) {
-            return isSimple;
+        if (uniqueMessage != null) {
+            return uniqueMessage;
         }
 
         // Use the same parser logic as main
@@ -98,17 +94,56 @@ public class Jack {
     }
 
     /**
+     * Splits the user input into command and argument parts.
+     *
+     * @param userInput the user's input string
+     * @return an array where the first element is the command and the second is the argument
+     */
+    private String[] processInput(String userInput) {
+        // Split input into command and argument
+        String[] part = userInput.split("\\s+", 2);
+
+        // Create an array to hold command and argument
+        String[] arrayOutput = new String[2];
+
+        arrayOutput[0] = part[0];
+        arrayOutput[1] = (part.length > 1) ? part[1].trim() : "";
+
+        return arrayOutput;
+    }
+
+    /**
+     * Handles specific invalid inputs and returns appropriate messages.
+     *
+     * @param userInput the user's input string
+     * @return response string for specific invalid inputs
+     */
+    public static String handleInvalid(String userInput) {
+        if (userInput.isEmpty()) {
+            return "Argh, stop wasting my time";
+        }
+
+        if (userInput.equals("blah")) {
+            return "blah, blah, blah";
+        }
+        return null;
+    }
+
+    /**
      * Handles simple commands like "bye" and "help".
      *
      * @param cmd the command string
      * @return response string or null if not a simple command
      */
-    private static String handleSimple(String cmd) {
+    private static String handleUnique(String cmd, TaskList tasks, String argument) {
         if ("bye".equals(cmd)) {
             return "Bye. Hope to see you again soon!";
         }
         if ("help".equals(cmd)) {
             return Ui.showHelp(); // or Ui.helpMessage()
+        }
+        if (cmd.startsWith("find")) {
+            return TaskList.findString(tasks, argument); // <- return matches, not full list
         }
         return null;
     }

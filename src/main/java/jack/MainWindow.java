@@ -41,6 +41,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Displays the greeting message from Jack when the application starts.
+     */
+    public void showGreeting() {
+        String greeting = "Ahoy! I'm Jack. What can I do for ye?";
+        dialogContainer.getChildren().add(
+                DialogBox.getJackDialog(greeting, jackImage)
+        );
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

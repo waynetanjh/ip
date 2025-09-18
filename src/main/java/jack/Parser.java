@@ -144,7 +144,6 @@ public class Parser {
         }
         case "find": {
             String keyword = userInput.split(" ", 2)[1].trim();
-
             TaskList.find(tasks, keyword);
             break;
         }
