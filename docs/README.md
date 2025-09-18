@@ -1,6 +1,6 @@
 # Jack User Guide
 
-![Jack](../src/main/resources/images/DaDuke.png)
+![Jack](../src/main/resources/images/Ui.png)
 
 Jack Sparrow is a helpful assistant that can keep track of all your tasks and deadlines.
 It is designed to help you stay organized and manage your time effectively.
@@ -36,12 +36,12 @@ Adds a task with a specific deadline.
 
 Format: `deadline DESCRIPTION /by DATE`
 
-Example: `deadline submit report /by 2023-09-20`
+Example: `deadline return book /by 2/12/2019 1800`
 
 Output:
 ```
 Got it. I've added this task:
-  [D][✗] submit report (by: 2023-09-20)
+  [D][ ] return book (by: Dec 2 2019 18:00)
 Now you have 2 tasks in the list.
 ```
 
