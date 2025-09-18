@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Jack {
     /** The storage file for saving and loading tasks */
-    private static final Storage STORAGE = new Storage("data/duke.txt");
+    private static final Storage STORAGE = new Storage("data/jack.txt");
     /** The list of tasks managed by the application */
     private final TaskList tasks = new TaskList();
 

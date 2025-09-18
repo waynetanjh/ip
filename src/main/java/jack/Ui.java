@@ -77,6 +77,12 @@ public class Ui {
                 + removed + "\n\tNow you have " + remaining + " tasks in the list.");
     }
 
+    /**
+     * Prints confirmation message after event task has been added
+     *
+     * @param tasks list of tasks
+     * @param numberOfTasks total number of tasks in the list
+     */
     public static void handleEventTask(List<Task> tasks, int numberOfTasks) {
         echo("\tGot it. I've added this task:\n\t  "
                 + tasks.get(numberOfTasks - 1)

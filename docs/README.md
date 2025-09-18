@@ -128,5 +128,5 @@ Bye. Hope to see you again soon!
 
 ## Data Storage
 - Your tasks are automatically saved after each command
-- Tasks are stored in the `data/duke.txt` file
+- Tasks are stored in the `data/jack.txt` file
 - The data will be loaded automatically when you restart the program

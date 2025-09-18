@@ -15,9 +15,9 @@
                 AnchorPane.rightAnchor="0.0" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefWidth="400.0" vvalue="1.0"
                     AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.bottomAnchor="43.0">
+                    AnchorPane.bottomAnchor="43.0" fitToWidth="true" >
             <content>
-                <VBox fx:id="dialogContainer" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefWidth="388.0"  fillWidth="true" />
             </content>
         </ScrollPane>
     </children>
