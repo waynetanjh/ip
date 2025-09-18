@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import javax.smartcardio.CommandAPDU;
-
 /**
  * Controller for the main GUI.
  */
@@ -27,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private Parser parser;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/JackSparrow.png"));
 
     @FXML
     public void initialize() {
