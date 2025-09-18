@@ -61,7 +61,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Find and display matching tasks
+     * Finds and display matching tasks
      * @param tasks list of tasks
      * @param keyword search keyword
      */

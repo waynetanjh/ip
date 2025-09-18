@@ -70,6 +70,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Encodes a Task object into a string for storage
+     * @param task The task to encode
+     * @return The encoded string representation of the task
+     */
     public String encode(Task task) {
         String done = String.valueOf(task.isDone() ? 1 : 0);
         if (task instanceof Todo) {
