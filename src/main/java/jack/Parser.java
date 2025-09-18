@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Parser class handles parsing and executing user commands.
+ * Handles parsing and executing user commands.
  */
 public class Parser {
     private static void handleDelete(List<Task> tasks, int index) {
@@ -75,10 +75,26 @@ public class Parser {
         Ui.handleEventTask(tasks, numberOfTasks);
     }
 
+    /**
+     * Handles the "list" command by displaying all tasks in the task list.
+     *
+     * @param tasks The list of tasks to display
+     */
     private static void handleList(List<Task> tasks) {
         Ui.echo(TaskList.formatList(tasks));
     }
 
+    /**
+     * Parses the user input and executes the corresponding command.
+     *
+     * @param input The command input by the user
+     * @param tasks The list of tasks to operate on
+     * @param storage The storage handler for saving/loading tasks
+     * @param scanner The scanner for reading user input
+     * @param argument The argument part of the user input (if any)
+     * @param userInput The full user input string
+     * @return true if the command is "bye" (to exit), false otherwise
+     */
     public static boolean parseAndExecute(String input, List<Task> tasks, Storage storage,
                                           Scanner scanner, String argument, String userInput) {
         switch (input) {

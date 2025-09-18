@@ -9,26 +9,35 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * The main entry point for the Jack application.
+ * Launches the JavaFX UI for Jack.
+ * Loads the main window FXML, injects the {@link Jack} backend into the controller,
+ * and shows the primary stage.
  */
 public class Main extends Application {
     private static final String DEFAULT_FILE_PATH = "jack";
     private Jack jack = new Jack();
-    // Existing constructor
+
+    /**
+     * Creates an application that uses the given storage profile or file path.
+     * Note: JavaFX does not use this constructor when launching via {@code Application.launch}.
+     *
+     * @param filePath the storage profile/file path to use for this session
+     */
     public Main(String filePath) {
-        // ...
+        // initialize using filePath if applicable
     }
 
-    // Overloaded constructor
     /**
-     * Constructor for Main class with default file path.
+     * Creates an application that uses the default storage profile.
      */
     public Main() {
         this(DEFAULT_FILE_PATH);
     }
 
     /**
-     * Main entry point for the JavaFX application.
+     * Starts the JavaFX application: loads {@code /view/MainWindow.fxml},
+     * sets the controller's {@code Jack} instance, and shows the primary stage.
+     *
      * @param stage the primary stage for this application
      */
     @Override
@@ -41,7 +50,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setTitle("Jack");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(jack);
+            fxmlLoader.<MainWindow>getController().setJack(jack);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

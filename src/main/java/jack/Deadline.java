@@ -21,10 +21,20 @@ public class Deadline extends Task {
         this.due = due;
     }
 
+    /**
+     * Returns the due date/time of the deadline task in a user-friendly format.
+     *
+     * @return The formatted due date/time string
+     */
     public String getDueDay() {
         return "(by: " + Dates.format(this.due) + ")";
     }
 
+    /**
+     * Returns the due date/time of the deadline task in ISO 8601 format.
+     *
+     * @return The due date/time as an ISO 8601 string
+     */
     public String getDueIso() {
         return due.toString(); // ISO_LOCAL_DATE_TIME
     }

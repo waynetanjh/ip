@@ -2,7 +2,7 @@ package jack;
 
 public class Todo extends Task {
     /**
-     * Create a new Todo task
+     * Creates a new Todo task with the given description.
      *
      * @param description The description of the todo task
      */

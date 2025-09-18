@@ -9,7 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for the main GUI.
+ * Controller for the main window.
+ * Wires FXML controls, keeps the scroll pinned to the latest message,
+ * and bridges user input to Jack to produce replies.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,16 +26,16 @@ public class MainWindow extends AnchorPane {
     private Jack jack;
     private Parser parser;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/JackSparrow.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image jackImage = new Image(this.getClass().getResourceAsStream("/images/JackSparrow.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
-    public void setDuke(Jack j) {
+    /** Injects the Jack instance */
+    public void setJack(Jack j) {
         this.jack = j;
         this.parser = new Parser();
     }
@@ -57,7 +59,7 @@ public class MainWindow extends AnchorPane {
 
         }
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getJackDialog(response, jackImage)
         );
         userInput.clear();
     }

@@ -40,9 +40,10 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Handles deletion of a task from the list.
+     *
      * @param tasks list of tasks
-     * @param index
-     * @return
+     * @param index index of the task to delete
+     * @return the removed task
      */
     public static Task handleDelete(List<Task> tasks, int index) {
         // Assert that tasks list is not null before any operation
@@ -61,7 +62,8 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Find and display matching tasks
+     * Finds and display matching tasks
+     *
      * @param tasks list of tasks
      * @param keyword search keyword
      */

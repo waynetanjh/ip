@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * UI class handles the interactions with user
+ * Handles the interactions with user
  */
 public class Ui {
     private static final String LINE = "-----------------------------------------";
@@ -77,6 +77,12 @@ public class Ui {
                 + removed + "\n\tNow you have " + remaining + " tasks in the list.");
     }
 
+    /**
+     * Prints confirmation message after event task has been added
+     *
+     * @param tasks list of tasks
+     * @param numberOfTasks total number of tasks in the list
+     */
     public static void handleEventTask(List<Task> tasks, int numberOfTasks) {
         echo("\tGot it. I've added this task:\n\t  "
                 + tasks.get(numberOfTasks - 1)
@@ -111,5 +117,27 @@ public class Ui {
      */
     public static void showMessage(String... messages) {
         Arrays.stream(messages).forEach(System.out::println);
+    }
+
+    /**
+     * Displays help message with list of available commands
+     *
+     * @return Help message string
+     */
+    public static String showHelp() {
+        return String.join("\n",
+                "Commands available:",
+                "  list - show all tasks",
+                "  todo <description> - add a todo",
+                "  deadline <description> /by <date> - add a deadline",
+                "  event <description> /from <start-date> /to <end-date> - add an event",
+                "  mark <task number> - mark task as done",
+                "  unmark <task number> - mark task as not done",
+                "  done <task number> - mark task as done",
+                "  delete <task number> - delete a task",
+                "  find <keyword> - find tasks containing keyword",
+                "  help - show this help message",
+                "  bye - exit the program"
+        );
     }
 }
