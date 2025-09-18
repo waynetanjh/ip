@@ -18,7 +18,7 @@ public class EventTest {
     @Test
     public void toString_correctFormat() {
         Event event = new Event("Team Meeting", "2023-09-16 14:00", "2023-09-16 15:00");
-        assertEquals("[E][✗] Team Meeting (from: 2023-09-16 14:00 to: 2023-09-16 15:00)",
+        assertEquals("[E][ ] Team Meeting (from: 2023-09-16 14:00 to: 2023-09-16 15:00)",
                 event.toString());
     }
 
@@ -27,7 +27,7 @@ public class EventTest {
         Event event = new Event("Team Meeting", "2023-09-16 14:00", "2023-09-16 15:00");
         event.markAsDone();
         assertTrue(event.isDone());
-        assertTrue(event.toString().contains("[✓]"));
+        assertTrue(event.toString().contains("[X]"));
     }
 
     @Test
