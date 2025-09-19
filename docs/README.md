@@ -3,7 +3,7 @@
 ![Jack](../src/main/resources/images/Ui.png)
 
 Jack Sparrow is a helpful assistant that can keep track of all your tasks and deadlines.
-It is designed to help you stay organized and manage your time effectively.
+It is designed to help you stay organized and manage your time effectively. 
 
 ## Features
 
@@ -12,6 +12,7 @@ It is designed to help you stay organized and manage your time effectively.
    - Mark tasks as done/undone
    - List all tasks
    - Delete tasks
+   - Find tasks 
 
 ## Commands
 
@@ -124,7 +125,7 @@ Here are the tasks in your list:
 2.[E][ ] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
 ```
 
-### Finding tasks 
+### 3. Finding tasks 
 Searches for tasks containing a specific keyword.
 
 Format: `find KEYWORD`
@@ -138,7 +139,7 @@ Here are the matching tasks in your list:
 2.[D][ ] return book (by: Dec 2 2019 18:00)
 ```
 
-### Getting Help
+### 4. Getting Help
 
 #### Showing available commands
 Displays a list of all available commands.
@@ -160,7 +161,7 @@ Commands available:
   bye - exit the program
 ```
 
-### Saving and Exiting
+### 5. Saving and Exiting
 
 #### Exiting the program
 Saves all tasks and exits the program.
