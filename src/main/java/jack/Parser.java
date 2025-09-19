@@ -51,7 +51,7 @@ public class Parser {
      * @param tasks new deadline tasks are added to this list of tasks
      * @param argument description of the deadline task
      * @param storage storage for saving tasks
-     * @return response message
+     * @return response message 
      */
     private static String handleDeadlineTask(List<Task> tasks, String argument, Storage storage) {
         if (argument == null || argument.isBlank()) {
@@ -81,7 +81,7 @@ public class Parser {
      * @param tasks The list to add the new event to
      * @param argument The description and timing of the event
      * @param storage storage for saving tasks
-     * @return response message
+     * @return response message for the event task
      */
     private static String handleEventTask(List<Task> tasks, String argument, Storage storage) {
         assert argument != null && !argument.isBlank() : "Event argument cannot be null or empty";
