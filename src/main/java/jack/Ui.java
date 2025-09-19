@@ -8,7 +8,7 @@ public class Ui {
     /**
      * Returns confirmation message when task has been marked as completed
      *
-     * @return confirmation message
+     * @return confirmation message as a string
      */
     public static String getMarkCompletedMessage() {
         return "Nice! I've marked this task as done.";
