@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -51,6 +52,7 @@ public class Main extends Application {
             stage.setTitle("Jack");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setJack(jack);
+            fxmlLoader.<MainWindow>getController().showGreeting();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,7 +3,7 @@
 ![Jack](../src/main/resources/images/Ui.png)
 
 Jack Sparrow is a helpful assistant that can keep track of all your tasks and deadlines.
-It is designed to help you stay organized and manage your time effectively.
+It is designed to help you stay organized and manage your time effectively. 
 
 ## Features
 
@@ -12,6 +12,7 @@ It is designed to help you stay organized and manage your time effectively.
    - Mark tasks as done/undone
    - List all tasks
    - Delete tasks
+   - Find tasks 
 
 ## Commands
 
@@ -26,9 +27,9 @@ Example: `todo read book`
 
 Output:
 ```
-Got it. I've added this task:
-  [T][X] read book
-Now you have 1 task in the list.
+Got it. I've added this task.
+Here are the tasks in your list:
+1.[T][ ] read book
 ```
 
 #### Adding a deadline
@@ -40,9 +41,10 @@ Example: `deadline return book /by 2/12/2019 1800`
 
 Output:
 ```
-Got it. I've added this task:
-  [D][ ] return book (by: Dec 2 2019 18:00)
-Now you have 2 tasks in the list.
+Got it. I've added this task.
+Here are the tasks in your list:
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 2 2019 18:00)
 ```
 
 #### Adding an event
@@ -54,9 +56,11 @@ Example: `event team meeting /from 2023-09-21 14:00 /to 2023-09-21 15:00`
 
 Output:
 ```
-Got it. I've added this task:
-  [E][✗] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
-Now you have 3 tasks in the list.
+Got it. I've added this task.
+Here are the tasks in your list:
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 2 2019 18:00)
+3.[E][ ] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
 ```
 
 ### 2. Managing Tasks
@@ -69,9 +73,9 @@ Format: `list`
 Output:
 ```
 Here are the tasks in your list:
-1. [T][X] read book
-2. [D][X] submit report (by: 2023-09-20 23:59)
-3. [E][X] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 2 2019 18:00)
+3.[E][ ] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
 ```
 
 #### Marking a task as done
@@ -83,8 +87,11 @@ Example: `mark 1`
 
 Output:
 ```
-Nice! I've marked this task as done:
- [T][X] read book
+Nice! I've marked this task as done.
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][ ] return book (by: Dec 2 2019 18:00)
+3.[E][ ] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
 ```
 
 #### Unmarking a task
@@ -96,8 +103,11 @@ Example: `unmark 1`
 
 Output:
 ```
-OK, I've marked this task as not done yet:
- [T][ ] read book
+OK, I've marked this task as not done yet.
+Here are the tasks in your list:
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 2 2019 18:00)
+3.[E][ ] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
 ```
 
 #### Deleting a task
@@ -109,12 +119,49 @@ Example: `delete 1`
 
 Output:
 ```
-Noted. I've removed this task:
-  [T][ ] read book
-Now you have 2 tasks in the list.
+Noted. I've removed this task.
+Here are the tasks in your list:
+1.[D][ ] return book (by: Dec 2 2019 18:00)
+2.[E][ ] team meeting (from: 2023-09-21 14:00 to: 2023-09-21 15:00)
 ```
 
-### 3. Saving and Exiting
+### 3. Finding tasks 
+Searches for tasks containing a specific keyword.
+
+Format: `find KEYWORD`
+
+Example: `find book`
+
+Output:
+```
+Here are the matching tasks in your list:
+1.[T][ ] read book
+2.[D][ ] return book (by: Dec 2 2019 18:00)
+```
+
+### 4. Getting Help
+
+#### Showing available commands
+Displays a list of all available commands.
+
+Format: `help`
+
+Output:
+```
+Commands available:
+  list - show all tasks
+  todo <description> - add a todo
+  deadline <description> /by <date> - add a deadline
+  event <description> /from <start-date> /to <end-date> - add an event
+  mark <task number> - mark task as done
+  unmark <task number> - mark task as not done
+  delete <task number> - delete a task
+  find <keyword> - find tasks containing keyword
+  help - show this help message
+  bye - exit the program
+```
+
+### 5. Saving and Exiting
 
 #### Exiting the program
 Saves all tasks and exits the program.
