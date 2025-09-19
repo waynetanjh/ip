@@ -12,7 +12,7 @@ public class Parser {
      *
      * @param tasks The list to delete from
      * @param index The index of the task to delete
-     * @param storage storage handler for saving tasks
+     * @param storage storage for saving tasks
      * @return response message
      */
     private static String handleDelete(List<Task> tasks, int index, Storage storage) {
@@ -27,7 +27,7 @@ public class Parser {
      *
      * @param tasks list that todo tasks are added to
      * @param argument description of the todo task
-     * @param storage storage handler for saving tasks
+     * @param storage storage for saving tasks
      * @return response message
      */
     private static String handleToDo(List<Task> tasks, String argument, Storage storage) {
@@ -50,7 +50,7 @@ public class Parser {
      *
      * @param tasks new deadline tasks are added to this list of tasks
      * @param argument description of the deadline task
-     * @param storage storage handler for saving tasks
+     * @param storage storage for saving tasks
      * @return response message
      */
     private static String handleDeadlineTask(List<Task> tasks, String argument, Storage storage) {
@@ -80,7 +80,7 @@ public class Parser {
      *
      * @param tasks The list to add the new event to
      * @param argument The description and timing of the event
-     * @param storage storage handler for saving tasks
+     * @param storage storage for saving tasks
      * @return response message
      */
     private static String handleEventTask(List<Task> tasks, String argument, Storage storage) {
@@ -105,6 +105,14 @@ public class Parser {
         }
     }
 
+    /** 
+     * Handles marking of tasks as done
+     * 
+     * @param tasks The list to add the new event to
+     * @param userInput The user input
+     * @param storage storage for saving tasks
+     * @return response message
+     */
     private static String handleMark(List<Task> tasks, String userInput, Storage storage) {
         try {
             String[] parts = userInput.split(" ");
@@ -124,6 +132,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles unmarking of tasks
+     * 
+     * @param tasks The list to add the new event to
+     * @param userInput The user input
+     * @param storage storage for saving tasks
+     * @return response message
+     */
     private static String handleUnmark(List<Task> tasks, String userInput, Storage storage) {
         try {
             String[] parts = userInput.split(" ");
@@ -143,6 +159,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the deletion of a task from the task list
+     * 
+     * @param tasks The list to delete from
+     * @param userInput The user input
+     * @param storage storage for saving tasks
+     * @return response message
+     */
     private static String handleDelete(List<Task> tasks, String userInput, Storage storage) {
         try {
             String[] parts = userInput.split(" ");
@@ -159,6 +183,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the finding of a task from the task list
+     * 
+     * @param tasks The list to find from
+     * @param userInput The user input
+     * @param storage storage for saving tasks
+     * @return response message
+     */
     private static String handleFind(List<Task> tasks, String userInput, Storage storage) {
         try {
             String[] parts = userInput.split(" ", 2);
@@ -178,7 +210,7 @@ public class Parser {
      *
      * @param input The command input by the user
      * @param tasks The list of tasks to operate on
-     * @param storage The storage handler for saving/loading tasks
+     * @param storage The storage for saving/loading tasks
      * @param argument The argument part of the user input (if any)
      * @param userInput The full user input string
      * @return response message for the command
